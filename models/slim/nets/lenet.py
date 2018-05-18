@@ -26,6 +26,7 @@ slim = tf.contrib.slim
 def lenet(images, num_classes=10, is_training=False,
           dropout_keep_prob=0.5,
           prediction_fn=slim.softmax,
+	  train_top_bn=None,
           scope='LeNet'):
   """Creates a variant of the LeNet model.
 
@@ -59,6 +60,7 @@ def lenet(images, num_classes=10, is_training=False,
     net = slim.conv2d(images, 32, [5, 5], scope='conv1')
     net = slim.max_pool2d(net, [2, 2], 2, scope='pool1')
     net = slim.conv2d(net, 64, [5, 5], scope='conv2')
+    end_points['LastConv'] = net
     net = slim.max_pool2d(net, [2, 2], 2, scope='pool2')
     net = slim.flatten(net)
     end_points['Flatten'] = net

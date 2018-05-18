@@ -58,8 +58,8 @@ __C.TRAIN.CLIP_GRADIENTS = -1.0
 
 # the following should have been in the INPUT, but are here for historical
 # reasons
-__C.TRAIN.IMAGE_SIZE = 450  # final cropped image size
-__C.TRAIN.RESIZE_SIDE = 480  # resize the input image to this size for preproc
+__C.TRAIN.IMAGE_SIZE = 144  # final cropped image size
+__C.TRAIN.RESIZE_SIDE = 144  # resize the input image to this size for preproc
 ## The RESIZE_SIDE is the size for the smallest side, so be careful,
 ## MPII has images with extreme ratios
 ## Note that if the difference RESIZE_SIDE to IMAGE_SIZE is too high,
@@ -105,7 +105,7 @@ __C.TRAIN.SAVE_INTERVAL_SECS = 1800
 
 __C.TRAIN.IGNORE_MISSING_VARS = True
 
-__C.TRAIN.CHECKPOINT_PATH = 'data/pretrained_models/inception_v3.ckpt'
+__C.TRAIN.CHECKPOINT_PATH = None
 
 # __C.TRAIN.CHECKPOINT_EXCLUDE_SCOPES = 'InceptionV3/Logits,InceptionV3/AuxLogits,PoseLogits'
 __C.TRAIN.CHECKPOINT_EXCLUDE_SCOPES = ''
@@ -220,7 +220,7 @@ __C.NET.LAST_CONV_MAP_FOR_POSE.inception_v2_tsn = 'InceptionV2_TSN/inception_5a'
 __C.NET.LAST_CONV_MAP_FOR_POSE.inception_v3 = 'Mixed_7c'
 __C.NET.LAST_CONV_MAP_FOR_POSE.resnet_v1_101 = 'resnet_v1_101/block4'
 __C.NET.LAST_CONV_MAP_FOR_POSE.vgg_16 = 'vgg_16/conv5'
-
+__C.NET.LAST_CONV_MAP_FOR_POSE.lenet = 'LastConv'
 
 # Train the top BN. Useful when training flow/multi-channel inputs other than
 # RGB. In case of ResNet, this means "train only top_bn", and keep others
@@ -249,9 +249,9 @@ __C.DATA_DIR = osp.abspath(osp.join(__C.ROOT_DIR, 'data'))
 # Model directory
 __C.EXP_DIR = 'expt_outputs/'
 
-__C.DATASET_NAME = 'mpii'
+__C.DATASET_NAME = 'my'
 
-__C.DATASET_DIR = 'data/mpii/mpii_tfrecords'
+__C.DATASET_DIR = '/home/nik/tum/thesis/AttentionalPoolingAction/src/data/my/my_tfrecords'
 
 # Set the following if using the train_test files from non-std location
 __C.DATASET_LIST_DIR = ''
@@ -291,9 +291,9 @@ def _merge_a_into_b(a, b):
     if type(a) is not edict:
         return
 
-    for k, v in a.iteritems():
+    for k, v in a.items():
         # a must specify keys that are in b
-        if not b.has_key(k):
+        if not k in b:
             raise KeyError('{} is not a valid config key'.format(k))
 
         # the types must match, too

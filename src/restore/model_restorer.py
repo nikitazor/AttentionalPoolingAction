@@ -5,7 +5,7 @@ from tensorflow.contrib import slim
 from tensorflow.python.platform import tf_logging as logging
 from tensorflow.python import pywrap_tensorflow
 import tensorflow as tf
-import var_name_mapper
+from .var_name_mapper import map
 
 
 def restore_model(checkpoint_path,
@@ -17,7 +17,7 @@ def restore_model(checkpoint_path,
   if checkpoint_path.endswith('.npy'):
     vars_to_restore_names = [
       el.name for el in checkpoint_variables]
-    key_name_mapper = var_name_mapper.map(var_name_mapper_type)
+    key_name_mapper = map(var_name_mapper_type)
     init_weights = np.load(checkpoint_path).item()
     init_weights_final = {}
     vars_restored = []

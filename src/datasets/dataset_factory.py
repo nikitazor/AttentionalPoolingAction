@@ -9,13 +9,15 @@ from datasets import hmdb51
 from datasets import charades
 from datasets import hico
 from datasets import jhmdb21
+from datasets import my
 
 datasets_map = {
   'mpii': mpii,
   'hmdb51': hmdb51,
   'charades': charades,
   'hico': hico,
-  'jhmdb21': jhmdb21
+  'jhmdb21': jhmdb21,
+  'my': my
 }
 
 

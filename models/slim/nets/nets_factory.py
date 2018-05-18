@@ -33,7 +33,7 @@ from nets import resnet_v2
 from nets import vgg
 
 sys.path.append('libs/tensorflow_compact_bilinear_pooling/')
-from compact_bilinear_pooling import compact_bilinear_pooling_layer
+#from compact_bilinear_pooling import compact_bilinear_pooling_layer
 
 slim = tf.contrib.slim
 
@@ -64,6 +64,7 @@ last_conv_map = {'inception_v3': 'Mixed_7c',
                  'inception_v2_tsn': 'InceptionV2_TSN/inception_5b',
                  'resnet_v1_101': 'resnet_v1_101/block4',
                  'vgg_16': 'vgg_16/conv5',
+		 'lenet': 'LastConv'
                 }
 
 arg_scopes_map = {'alexnet_v2': alexnet.alexnet_v2_arg_scope,
